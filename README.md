@@ -7,7 +7,7 @@
  
 ## 
  - ReactJS (class components)
- - HTML, CSS
+ - HTML, CSS (styled-components)
  - Менеджеров состояний mobx
 
 
