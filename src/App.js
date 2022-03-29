@@ -37,8 +37,8 @@ const App = observer(class extends Component {
     return (
       <Div className="app">
         <Buttons>
-          <button>Добавить рабочего</button>
-          <button onClick={store.deleteWorker} disabled={store.worker.id ===null}>Удалить рабочего</button>
+          <button onClick={store.addWorker}>Добавить рабочего</button>
+          <button onClick={store.deleteWorker} disabled={(store.worker.id === null) && !(store.worker.id < store.maxId) || !store.data.length}>Удалить рабочего</button>
         </Buttons>
         <Content>
           <List />
