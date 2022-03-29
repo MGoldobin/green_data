@@ -32,11 +32,12 @@ const Element = styled.div`
 const Worker = observer(class extends Component {
 	render() {
 		return (
-			<Element id={this.props.info.id} workerId={store.worker.id} onClick={() => store.changeWorker(this.props.info)}>
+			<Element id={this.props.info.id} workerId={store.worker.id} onClick={() => /*console.log(this.props.info)*/ store.changeWorker(this.props.info)}>
 				<p>{this.props.info.id}</p>
 				<p>{this.props.info.name}</p>
 				<p>{this.props.info.position}</p>
 				<p>{this.props.info.birth}</p>
+				<p>{this.props.info.gender}</p>
 				<p>{this.props.info.isFired ? 'Уволен' : 'Не уволен'}</p>
 			</Element>
 		)
