@@ -1,14 +1,15 @@
-import { action, computed, makeObservable, observable } from "mobx"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
 class Store {
 	worker = {
 		id: null,
 		name: '',
 		position: '',
-		birth: null,
-		gender: null,
+		birth: '',
+		gender: '',
 		isFired: false
 	}
+	//data=[]
 
 	data = [
 		{
@@ -124,28 +125,36 @@ class Store {
 	}
 
 	get maxId() {
-		return this.data.reduce((acc, curr) => acc.id > curr.id ? acc.id : curr.id)+1
+		return this.data.length ? this.data.reduce((acc, curr) => acc.id > curr.id ? acc.id : curr.id)+1 : 0
 	} 
 
 	zeroingWorker() {
-		this.worker = {
-			id: null,
+		runInAction(() => this.worker = {
+			id: this.maxId,
 			name: '',
 			position: '',
 			birth: null,
 			gender: null,
 			isFired: false
-		}
+		})
 	}
 
 	changeWorker(newWorker) {
-		this.worker = newWorker
+		this.worker = {
+			id: newWorker.id,
+			name: newWorker.name,
+			position: newWorker.position,
+			birth: newWorker.birth,
+			gender: newWorker.gender,
+			isFired: newWorker.isFired
+		}
 		this.data[this.data.indexOf(el => el.id === this.worker.id)] = this.worker
 	}
 
-	addWorker(newWorker) {
-		this.data.push(newWorker)
-		this.worker = this.data[this.data.length - 1].assign()
+	addWorker() {
+		this.data.push(this.worker)
+		this.zeroingWorker()
+		this.worker = this.data[this.data.length - 1]
 	}
 
 	deleteWorker() {
