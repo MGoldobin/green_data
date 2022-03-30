@@ -1,44 +1,34 @@
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
 class Store {
-	worker = {
-		id: null,
-		name: '',
-		position: '',
-		birth: '',
-		gender: '',
-		isFired: false
-	}
-	//data=[]
-
 	data = [
 		{
 			id: 1,
-			name: 'Игорь Петрович',
+			name: 'Куприянова Валерия Сергеевна',
 			position: 'Junior Frontend',
 			birth: '1988-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 2,
-			name: 'Игорь Петрович',
+			name: 'Калмыкова Милана Семёновна',
 			position: 'Junior Backend',
 			birth: '2000-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 3,
-			name: 'Игорь Петрович',
+			name: 'Акимова Виктория Руслановна',
 			position: 'Senior Frontend',
 			birth: '1993-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 4,
-			name: 'Игорь Петрович',
+			name: 'Черных Альберт Михайлович',
 			position: 'Junior Frontend',
 			birth: '1988-03-27',
 			gender: 'male',
@@ -46,15 +36,15 @@ class Store {
 		},
 		{
 			id: 5,
-			name: 'Игорь Петрович',
+			name: 'Королева Ульяна Ильинична',
 			position: 'Junior Backend',
 			birth: '2000-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 6,
-			name: 'Игорь Петрович',
+			name: 'Савин Иван Павлович',
 			position: 'Senior Frontend',
 			birth: '1993-03-27',
 			gender: 'male',
@@ -62,7 +52,7 @@ class Store {
 		},
 		{
 			id: 7,
-			name: 'Игорь Петрович',
+			name: 'Дмитриев Александр Макарович',
 			position: 'Junior Frontend',
 			birth: '1988-03-27',
 			gender: 'male',
@@ -70,7 +60,7 @@ class Store {
 		},
 		{
 			id: 8,
-			name: 'Игорь Петрович',
+			name: 'Баженов Роман Александрович',
 			position: 'Junior Backend',
 			birth: '2000-03-27',
 			gender: 'male',
@@ -78,23 +68,23 @@ class Store {
 		},
 		{
 			id: 9,
-			name: 'Игорь Петрович',
+			name: 'Воробьева Екатерина Тимофеевна',
 			position: 'Senior Frontend',
 			birth: '1993-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 10,
-			name: 'Игорь Петрович',
+			name: 'Воробьева Дарья Алиевна',
 			position: 'Junior Frontend',
 			birth: '1988-03-27',
-			gender: 'male',
+			gender: 'famale',
 			isFired: false
 		},
 		{
 			id: 11,
-			name: 'Игорь Петрович',
+			name: 'Ковалев Андрей Адамович',
 			position: 'Junior Backend',
 			birth: '2000-03-27',
 			gender: 'male',
@@ -102,13 +92,22 @@ class Store {
 		},
 		{
 			id: 12,
-			name: 'Игорь Петрович',
+			name: 'Матвеев Роберт Михайлович',
 			position: 'Senior Frontend',
 			birth: '1993-03-27',
 			gender: 'male',
 			isFired: false
 		},
 	]
+
+	worker = {
+		id: this.maxId,
+		name: '',
+		position: '',
+		birth: '',
+		gender: '',
+		isFired: false
+	}
 
 	constructor() {
 		makeObservable(this, {
@@ -133,8 +132,8 @@ class Store {
 			id: this.maxId,
 			name: '',
 			position: '',
-			birth: null,
-			gender: null,
+			birth: '',
+			gender: '',
 			isFired: false
 		})
 	}
@@ -148,13 +147,11 @@ class Store {
 			gender: newWorker.gender,
 			isFired: newWorker.isFired
 		}
-		this.data[this.data.indexOf(el => el.id === this.worker.id)] = this.worker
+		this.data[this.data.findIndex(el => el.id === this.worker.id)] = this.worker
 	}
 
 	addWorker() {
 		this.data.push(this.worker)
-		this.zeroingWorker()
-		this.worker = this.data[this.data.length - 1]
 	}
 
 	deleteWorker() {
